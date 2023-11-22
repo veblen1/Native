@@ -26,14 +26,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.sunbell.nicepricemap.sharedpreferences.SharedPreferencesUtil
+import com.sunbell.nicepricemap.view.AlarmPage
 import com.sunbell.nicepricemap.view.BottomBar
 import com.sunbell.nicepricemap.view.HomePage
 import com.sunbell.nicepricemap.view.MapPage
 import com.sunbell.nicepricemap.view.PermissionPage
 import com.sunbell.nicepricemap.view.SettingPage
 import com.sunbell.nicepricemap.view.TopBar
-import com.sunbell.nicepricemap.sharedpreferences.SharedPreferencesUtil
-import com.sunbell.nicepricemap.view.AlarmPage
 import com.sunbell.nicepricemap.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +45,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
+            navController = rememberNavController() // 초기화
 
             // 권한 관련 상태 관리 변수들
             var locationPermissionsGranted by remember { mutableStateOf(areLocationPermissionsAlreadyGranted()) }
@@ -78,8 +81,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            // 앱의 나머지 UI 및 로직
             AppNavigation(navController, sharedPreferencesUtil)
-
         }
     }
 
@@ -95,6 +98,7 @@ class MainActivity : ComponentActivity() {
     private fun decideCurrentPermissionStatus(locationPermissionsGranted: Boolean): String {
         return if (locationPermissionsGranted) "Permissions Granted" else "Permissions Denied"
     }
+
 }
 
 @Composable
@@ -105,7 +109,8 @@ fun AppNavigation(
     val userViewModel: UserViewModel = hiltViewModel()
     val context = LocalContext.current
 
-    //////// 권한 목록 + 확인
+
+    /**권한 목록 + 확인**/
     val permissionsList = mutableListOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -114,20 +119,20 @@ fun AppNavigation(
     val hasAllPermissions = permissionsList.all {
         ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
     }
-
     // 시작화면
     val startDestination = if (hasAllPermissions) {
-        "Login"
+        "Home"
     } else {
-        "Permission"
+        "PermissionPage"
     }
-    ////////
+    /************************/
+
 
     Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
 
         val currentDestination = navController.currentBackStackEntryAsState().value?.destination?.route
         val showNavBar = remember(currentDestination) {
-            currentDestination != "Login" && currentDestination != "SignUp" && currentDestination != "Permission"
+            currentDestination != "PermissionPage"
         }
         Box {
             Column {
@@ -136,7 +141,7 @@ fun AppNavigation(
                 }
                 Box(modifier = Modifier.weight(1f)) {
                     NavHost(navController, startDestination = startDestination) {
-                        composable("Permission") { PermissionPage(navController) }
+                        composable("PermissionPage") { PermissionPage(navController) }
 
                         composable("Home") { HomePage(navController) }
                         composable("MapPage") { MapPage(navController) }

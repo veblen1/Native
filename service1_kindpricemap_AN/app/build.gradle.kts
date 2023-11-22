@@ -4,15 +4,14 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.nicepricemap"
+    namespace = "com.sunbell.nicepricemap"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.nicepricemap"
+        applicationId = "com.sunbell.nicepricemap"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -34,14 +33,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -63,11 +63,16 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
     // 권한
     implementation("com.google.accompanist:accompanist-permissions:0.30.1")
     // Hilt 의존성
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     // Hilt ViewModel
     kapt("androidx.hilt:hilt-compiler:1.1.0")
@@ -83,7 +88,6 @@ dependencies {
     // GPS // 네이버 compose 지도가 16.0.0과 호환중
     implementation ("com.google.android.gms:play-services-location:16.0.0")
     // 네이버 지도
-    implementation("com.naver.maps:map-sdk:3.17.0")
     implementation ("io.github.fornewid:naver-map-compose:1.4.0")
     // Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
@@ -91,10 +95,6 @@ dependencies {
     // Glance
     implementation ("androidx.glance:glance-appwidget:1.0.0")
     implementation ("androidx.glance:glance-material3:1.0.0")
-
-    // FCM
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-messaging-ktx")
 
     // Room
     val room_version = "2.6.0"
