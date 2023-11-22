@@ -28,7 +28,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sunbell.nicepricemap.sharedpreferences.SharedPreferencesUtil
-import com.sunbell.nicepricemap.view.AlarmPage
 import com.sunbell.nicepricemap.view.BottomBar
 import com.sunbell.nicepricemap.view.HomePage
 import com.sunbell.nicepricemap.view.MapPage
@@ -143,9 +142,8 @@ fun AppNavigation(
                     NavHost(navController, startDestination = startDestination) {
                         composable("PermissionPage") { PermissionPage(navController) }
 
-                        composable("Home") { HomePage(navController) }
-                        composable("MapPage") { MapPage(navController) }
-                        composable("AlarmPage") { AlarmPage(navController) }
+                        composable("Home") { HomePage(navController,userViewModel, sharedPreferencesUtil) }
+                        composable("MapPage") { MapPage(navController,userViewModel, sharedPreferencesUtil) }
                         composable("SettingPage") { SettingPage(navController, sharedPreferencesUtil) }
                     }
                 }
