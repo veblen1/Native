@@ -137,7 +137,7 @@ fun AppNavigation(
         Box {
             Column {
                 if (showNavBar) {
-                    TopBar(navController)
+                    TopBar()
                 }
                 Box(modifier = Modifier.weight(1f)) {
                     NavHost(navController, startDestination = startDestination) {
@@ -146,7 +146,7 @@ fun AppNavigation(
                         composable("Home") { HomePage(navController) }
                         composable("MapPage") { MapPage(navController) }
                         composable("AlarmPage") { AlarmPage(navController) }
-                        composable("EventPage") { SettingPage(navController, sharedPreferencesUtil) }
+                        composable("SettingPage") { SettingPage(navController, sharedPreferencesUtil) }
                     }
                 }
                 if (showNavBar) {
