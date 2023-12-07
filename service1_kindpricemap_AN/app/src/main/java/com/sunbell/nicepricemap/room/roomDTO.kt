@@ -40,11 +40,22 @@ data class Restaurant(
 // DAO
 @Dao
 interface RestaurantDao {
+
+    // 데이터 베이스 저장
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(restaurants: List<Restaurant>)
 
+    // 조회
     @Query("SELECT * FROM restaurant")
     fun getAllRestaurants(): List<Restaurant>
+
+    // 현재 위치와 가까운 상위 3개 식당 찾기
+    @Query("SELECT * FROM restaurant ORDER BY ((latitude-:lat)*(latitude-:lat) + (longitude-:lon)*(longitude-:lon)) ASC LIMIT 3")
+    fun findTop3NearbyRestaurants(lat: Double, lon: Double): List<Restaurant>
+
+    // visit 변경
+    @Query("UPDATE restaurant SET visit = :visit WHERE id = :restaurantId")
+    fun updateVisitStatus(restaurantId: Int, visit: Boolean)
 
 
 }

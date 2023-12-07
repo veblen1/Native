@@ -16,12 +16,15 @@ fun parseCsvFile(inputStream: InputStream): List<Restaurant> {
                 name = tokens.getOrNull(3) ?: "",
                 contact = tokens.getOrNull(4) ?: "",
                 address = tokens.getOrNull(5) ?: "",
-                menu1 = tokens.getOrNull(6) ?: "",
-                price1 = tokens.getOrNull(7)?.toIntOrNull() ?: 0,
-                menu2 = tokens.getOrNull(8) ?: "",
-                price2 = tokens.getOrNull(9)?.toIntOrNull() ?: 0,
-                menu3 = tokens.getOrNull(10) ?: "",
-                price3 = tokens.getOrNull(11)?.toIntOrNull() ?: 0
+                latitude = tokens.getOrNull(6)?.toDoubleOrNull() ?: 0.0,
+                longitude = tokens.getOrNull(7)?.toDoubleOrNull() ?: 0.0,
+                menu1 = tokens.getOrNull(8) ?: "",
+                price1 = tokens.getOrNull(9)?.toIntOrNull() ?: 0,
+                menu2 = tokens.getOrNull(10) ?: "",
+                price2 = tokens.getOrNull(11)?.toIntOrNull() ?: 0,
+                menu3 = tokens.getOrNull(12) ?: "",
+                price3 = tokens.getOrNull(13)?.toIntOrNull() ?: 0,
+                visit = tokens.getOrNull(14)?.toBoolean() ?: false
             )
             restaurants.add(restaurant)
         }

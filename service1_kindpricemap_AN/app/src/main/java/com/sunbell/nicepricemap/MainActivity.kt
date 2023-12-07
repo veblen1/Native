@@ -29,6 +29,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sunbell.nicepricemap.sharedpreferences.SharedPreferencesUtil
 import com.sunbell.nicepricemap.view.BottomBar
+import com.sunbell.nicepricemap.view.CounterWidget
 import com.sunbell.nicepricemap.view.HomePage
 import com.sunbell.nicepricemap.view.MapPage
 import com.sunbell.nicepricemap.view.PermissionPage
@@ -46,6 +47,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            CounterWidget
+
             navController = rememberNavController() // 초기화
 
             // 권한 관련 상태 관리 변수들

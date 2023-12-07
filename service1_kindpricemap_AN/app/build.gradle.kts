@@ -93,6 +93,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     // Glance
+    implementation ("androidx.glance:glance:1.0.0")
     implementation ("androidx.glance:glance-appwidget:1.0.0")
     implementation ("androidx.glance:glance-material3:1.0.0")
 
