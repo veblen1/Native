@@ -3,6 +3,7 @@ package com.sunbell.nicepricemap.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
+import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -10,6 +11,7 @@ import com.google.android.gms.location.LocationServices
 import com.sunbell.nicepricemap.repository.UserRepository
 import com.sunbell.nicepricemap.room.Restaurant
 import com.sunbell.nicepricemap.sharedpreferences.SharedPreferencesUtil
+import com.sunbell.nicepricemap.view.CounterWidget
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -81,12 +83,7 @@ class UserViewModel @Inject constructor(
             _nearbyRestaurants.value = restaurants
 
             // Glance 위젯 업데이트 로직
-            updateGlanceWidgetWithRestaurants(restaurants)
+//            updateGlanceWidgetWithRestaurants(restaurants)
         }
     }
-
-    private fun updateGlanceWidgetWithRestaurants(restaurants: List<Restaurant>) {
-        // Glance 위젯 업데이트 로직 구현
-    }
-
 }

@@ -8,6 +8,7 @@ pluginManagement {
     }
     plugins {
         id("dagger.hilt.android.plugin") version "2.44"
+        id("org.jetbrains.kotlin.android") version "1.8.10"
     }
 }
 dependencyResolutionManagement {
